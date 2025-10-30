@@ -3,32 +3,32 @@
 
 using namespace std;
 
-// Estrutura do nÛ da ·rvore
+// Estrutura do n√≥ da √°rvore
 struct No {
     string chave;    // valor da pessoa
-    int contador;    // n˙mero de ocorrÍncias
-    No* esquerda;    // filho ‡ esquerda
-    No* direita;    // filho ‡ direita
+    int contador;    // n√∫mero de ocorr√™ncias
+    No* esquerda;    // filho √† esquerda
+    No* direita;    // filho √† direita
 };
 
-// Cria um novo nÛ
+// Cria um novo n√≥
 No* criarNo(string chave) {
     No* novo = new No;
     novo->chave = chave;
-    novo->contador = 1;  // inicia com 1 ocorrÍncia
+    novo->contador = 1;  // inicia com 1 ocorr√™ncia
     novo->esquerda = NULL;
     novo->direita = NULL;
     return novo;
 }
 
-// InserÁ„o na BST considerando repetiÁıes
+// Inser√ß√£o na BST considerando repeti√ß√µes
 No* inserir(No* raiz, string chave) {
     if (raiz == NULL) {
         return criarNo(chave);
     }
 
     if (chave == raiz->chave) {
-        raiz->contador++; // incrementa contador se chave j· existe
+        raiz->contador++; // incrementa contador se chave j√° existe
         cout << "Chave repetida. Contador agora: " << raiz->contador << endl;
     } else if (chave < raiz->chave) {
         raiz->esquerda = inserir(raiz->esquerda, chave);
@@ -38,14 +38,14 @@ No* inserir(No* raiz, string chave) {
     return raiz;
 }
 
-// Encontra o menor nÛ (necess·rio na remoÁ„o)
+// Encontra o menor n√≥ (necess√°rio na remo√ß√£o)
 No* minimo(No* raiz) {
     while (raiz && raiz->esquerda != NULL)
         raiz = raiz->esquerda;
     return raiz;
 }
 
-// RemoÁ„o considerando contador
+// Remo√ß√£o considerando contador
 No* remover(No* raiz, string chave) {
     if (raiz == NULL) return NULL;
 
@@ -54,14 +54,14 @@ No* remover(No* raiz, string chave) {
     } else if (chave > raiz->chave) {
         raiz->direita = remover(raiz->direita, chave);
     } else {
-        // Encontrou o nÛ
+        // Encontrou o n√≥
         if (raiz->contador > 1) {
             raiz->contador--; // apenas decrementa contador
             cout << "Decrementando contador. Novo contador: " << raiz->contador << endl;
             return raiz;
         }
 
-        // RemoÁ„o do nÛ quando contador == 1
+        // Remo√ß√£o do n√≥ quando contador == 1
         if (raiz->esquerda == NULL) {
             No* temp = raiz->direita;
             delete raiz;
@@ -72,7 +72,7 @@ No* remover(No* raiz, string chave) {
             return temp;
         }
 
-        // NÛ com dois filhos
+        // N√≥ com dois filhos
         No* temp = minimo(raiz->direita);
         raiz->chave = temp->chave;
         raiz->contador = temp->contador;
@@ -81,7 +81,7 @@ No* remover(No* raiz, string chave) {
     return raiz;
 }
 
-// Impress„o em ordem
+// Impress√£o em ordem
 void imprimirEmOrdem(No* raiz) {
     if (!raiz) return;
     imprimirEmOrdem(raiz->esquerda);
