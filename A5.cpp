@@ -3,14 +3,14 @@
 
 using namespace std;
 
-// Estrutura do nó da árvore
+// Estrutura do nÃ³ da Ã¡rvore
 struct No {
-    string chave;    // valor do nó
+    string chave;    // valor do nÃ³
     No* esquerda;    // ponteiro para filho esquerdo
     No* direita;    // ponteiro para filho direito
 };
 
-// Cria um novo nó
+// Cria um novo nÃ³
 No* criarNo(string chave) {
     No* novo = new No;
     novo->chave = chave;
@@ -19,7 +19,7 @@ No* criarNo(string chave) {
     return novo;
 }
 
-// Inserção simples em BST
+// InserÃ§Ã£o simples em BST
 No* inserir(No* raiz, string chave) {
     if (!raiz) return criarNo(chave);
 
@@ -27,28 +27,28 @@ No* inserir(No* raiz, string chave) {
         raiz->esquerda = inserir(raiz->esquerda, chave);
     else if (chave > raiz->chave)
         raiz->direita = inserir(raiz->direita, chave);
-    // chaves iguais não são inseridas (para simplificar)
+    // chaves iguais nÃ£o sÃ£o inseridas (para simplificar)
     return raiz;
 }
 
-// Função que verifica se a árvore é cheia
+// FunÃ§Ã£o que verifica se a Ã¡rvore Ã© cheia
 int ehCheia(No* raiz) {
     if (raiz == NULL)
-        return 1; // árvore vazia é cheia
+        return 1; // Ã¡rvore vazia Ã© cheia
 
-    // Se nó folha
+    // Se nÃ³ folha
     if (raiz->esquerda == NULL && raiz->direita == NULL)
         return 1;
 
-    // Se nó tem os dois filhos
+    // Se nÃ³ tem os dois filhos
     if (raiz->esquerda != NULL && raiz->direita != NULL)
         return ehCheia(raiz->esquerda) && ehCheia(raiz->direita);
 
-    // Nó com apenas um filho ? não cheia
+    // NÃ³ com apenas um filho ? nÃ£o cheia
     return 0;
 }
 
-// Percorre e imprime a árvore em ordem
+// Percorre e imprime a Ã¡rvore em ordem
 void imprimirEmOrdem(No* raiz) {
     if (!raiz) return;
     imprimirEmOrdem(raiz->esquerda);
