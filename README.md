@@ -12,9 +12,8 @@ Os códigos abordam diferentes estruturas e algoritmos fundamentais para a organ
 - **A4.cpp** – Implementação de pilhas e filas
 - **A5.cpp** – Operações com filas circulares ou duplamente encadeadas
 
-🔹 **Atividades da Parte B**
-- **B1.cpp** – Introdução a árvores binárias
-- **B2.cpp** – Árvores balanceadas (AVL)
+🔹 **Atividade da Parte B**
+- **B1.cpp** – Árvores balanceadas (AVL)
 
 🔹 **Atividades da Parte C**
 - **C1.cpp** – Implementação de grafos com matriz de adjacência
