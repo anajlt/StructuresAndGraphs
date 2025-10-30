@@ -6,11 +6,11 @@
 using namespace std;
 
 //------------------------------------------------------------------------
-//   Classe orientada a objeto para a ¡rvore AVL
+//   Classe orientada a objeto para a √Årvore AVL
 //------------------------------------------------------------------------
 class ArvoreAVL {
 private:
-    // Estrutura interna do nÛ
+    // Estrutura interna do n√≥
     struct NO {
         int info;
         int altura;
@@ -20,7 +20,7 @@ private:
 
     NO* raiz;
 
-    // ---------- M…TODOS AUXILIARES PRIVADOS ----------
+    // ---------- M√âTODOS AUXILIARES PRIVADOS ----------
 
     void Libera_NO(NO* no) {
         if (no == NULL) return;
@@ -85,7 +85,7 @@ private:
         return no1;
     }
 
-    // INSER«√O RECURSIVA
+    // INSER√á√ÉO RECURSIVA
     int Insere(NO*& raiz, int valor) {
         int ok;
         if (raiz == NULL) {
@@ -128,10 +128,10 @@ private:
         return ok;
     }
 
-    // REMO«√O RECURSIVA
+    // REMO√á√ÉO RECURSIVA
     int Remove(NO*& raiz, int valor) {
         if (raiz == NULL) {
-            cout << "Valor n„o existe!" << endl;
+            cout << "Valor n√£o existe!" << endl;
             return 0;
         }
 
@@ -180,7 +180,7 @@ private:
         return sai;
     }
 
-    // RELAT”RIOS
+    // RELAT√ìRIOS
     void Relatorio_Insercao(NO* raiz) {
         cout << "| " << setw(2) << raiz->info << "  |\t " << setw(2)
              << Altura_NO(raiz) << "    |" << endl;
@@ -194,7 +194,7 @@ private:
         cout << "----------------------" << endl;
     }
 
-    // IMPRESS’ES RECURSIVAS
+    // IMPRESS√ïES RECURSIVAS
     void PreOrdem(NO* raiz) {
         if (raiz != NULL) {
             Relatorio_Insercao(raiz);
@@ -234,7 +234,7 @@ public:
         raiz = NULL;
     }
 
-    // ---------- M…TODOS P⁄BLICOS ----------
+    // ---------- M√âTODOS P√öBLICOS ----------
     bool Vazia() { return raiz == NULL; }
 
     void Inserir(int valor) { Insere(raiz, valor); }
@@ -284,7 +284,7 @@ public:
 };
 
 //------------------------------------------------------------------------
-//   FUN«√O MAIN COM MENU INTERATIVO
+//   FUN√á√ÉO MAIN COM MENU INTERATIVO
 //------------------------------------------------------------------------
 int main() {
     ArvoreAVL arv;
