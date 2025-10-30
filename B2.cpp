@@ -3,25 +3,25 @@
 #include <algorithm> // para max()
 using namespace std;
 
-// Estrutura do nó AVL
+// Estrutura do nÃ³ AVL
 struct No {
-    string nome;    // chave da árvore
+    string nome;    // chave da Ã¡rvore
     char sexo;      // 'M' ou 'F'
     int idade;
     float peso;
     No* esquerda;   // filho esquerdo
     No* direita;    // filho direito
-    int altura;     // altura do nó
+    int altura;     // altura do nÃ³
 };
 
-// Função para obter a altura de um nó
+// FunÃ§Ã£o para obter a altura de um nÃ³
 int altura(No* n) {
     if (n == NULL)
         return 0;
     return n->altura;
 }
 
-// Cria um novo nó
+// Cria um novo nÃ³
 No* criarNo(string nome, char sexo, int idade, float peso) {
     No* novo = new No;
     novo->nome = nome;
@@ -30,16 +30,16 @@ No* criarNo(string nome, char sexo, int idade, float peso) {
     novo->peso = peso;
     novo->esquerda = NULL;
     novo->direita = NULL;
-    novo->altura = 1; // novo nó é folha inicialmente
+    novo->altura = 1; // novo nÃ³ Ã© folha inicialmente
     return novo;
 }
 
-// Função para rotacionar à direita
+// FunÃ§Ã£o para rotacionar Ã  direita
 No* rotacaoDireita(No* y) {
     No* x = y->esquerda;
     No* T2 = x->direita;
 
-    // Rotação
+    // RotaÃ§Ã£o
     x->direita = y;
     y->esquerda = T2;
 
@@ -50,12 +50,12 @@ No* rotacaoDireita(No* y) {
     return x; // nova raiz
 }
 
-// Função para rotacionar à esquerda
+// FunÃ§Ã£o para rotacionar Ã  esquerda
 No* rotacaoEsquerda(No* x) {
     No* y = x->direita;
     No* T2 = y->esquerda;
 
-    // Rotação
+    // RotaÃ§Ã£o
     y->esquerda = x;
     x->direita = T2;
 
@@ -73,37 +73,37 @@ int fatorBalanceamento(No* n) {
     return altura(n->esquerda) - altura(n->direita);
 }
 
-// Inserção na árvore AVL
+// InserÃ§Ã£o na Ã¡rvore AVL
 No* inserir(No* raiz, string nome, char sexo, int idade, float peso) {
     if (raiz == NULL)
         return criarNo(nome, sexo, idade, peso);
 
-    // Inserção baseada em chave (nome)
+    // InserÃ§Ã£o baseada em chave (nome)
     if (nome < raiz->nome)
         raiz->esquerda = inserir(raiz->esquerda, nome, sexo, idade, peso);
     else if (nome > raiz->nome)
         raiz->direita = inserir(raiz->direita, nome, sexo, idade, peso);
     else
-        return raiz; // chaves iguais não são inseridas
+        return raiz; // chaves iguais nÃ£o sÃ£o inseridas
 
-    // Atualiza altura do nó atual
+    // Atualiza altura do nÃ³ atual
     raiz->altura = 1 + max(altura(raiz->esquerda), altura(raiz->direita));
 
     // Calcula fator de balanceamento
     int fb = fatorBalanceamento(raiz);
 
-    // Rotação LL
+    // RotaÃ§Ã£o LL
     if (fb > 1 && nome < raiz->esquerda->nome)
         return rotacaoDireita(raiz);
-    // Rotação RR
+    // RotaÃ§Ã£o RR
     if (fb < -1 && nome > raiz->direita->nome)
         return rotacaoEsquerda(raiz);
-    // Rotação LR
+    // RotaÃ§Ã£o LR
     if (fb > 1 && nome > raiz->esquerda->nome) {
         raiz->esquerda = rotacaoEsquerda(raiz->esquerda);
         return rotacaoDireita(raiz);
     }
-    // Rotação RL
+    // RotaÃ§Ã£o RL
     if (fb < -1 && nome < raiz->direita->nome) {
         raiz->direita = rotacaoDireita(raiz->direita);
         return rotacaoEsquerda(raiz);
@@ -112,7 +112,7 @@ No* inserir(No* raiz, string nome, char sexo, int idade, float peso) {
     return raiz; // retorna raiz balanceada
 }
 
-// Encontra o nó com menor valor (para remoção)
+// Encontra o nÃ³ com menor valor (para remoÃ§Ã£o)
 No* minimo(No* raiz) {
     No* atual = raiz;
     while (atual->esquerda != NULL)
@@ -120,7 +120,7 @@ No* minimo(No* raiz) {
     return atual;
 }
 
-// Remoção na árvore AVL
+// RemoÃ§Ã£o na Ã¡rvore AVL
 No* remover(No* raiz, string nome) {
     if (raiz == NULL) return raiz;
 
@@ -129,14 +129,14 @@ No* remover(No* raiz, string nome) {
     else if (nome > raiz->nome)
         raiz->direita = remover(raiz->direita, nome);
     else {
-        // Nó encontrado
+        // NÃ³ encontrado
         if (!raiz->esquerda || !raiz->direita) {
             No* temp = raiz->esquerda ? raiz->esquerda : raiz->direita;
             if (temp == NULL) {
                 temp = raiz;
                 raiz = NULL;
             } else
-                *raiz = *temp; // copia conteúdo
+                *raiz = *temp; // copia conteÃºdo
             delete temp;
         } else {
             No* temp = minimo(raiz->direita);
@@ -157,18 +157,18 @@ No* remover(No* raiz, string nome) {
     // Balanceamento
     int fb = fatorBalanceamento(raiz);
 
-    // Rotação LL
+    // RotaÃ§Ã£o LL
     if (fb > 1 && fatorBalanceamento(raiz->esquerda) >= 0)
         return rotacaoDireita(raiz);
-    // Rotação LR
+    // RotaÃ§Ã£o LR
     if (fb > 1 && fatorBalanceamento(raiz->esquerda) < 0) {
         raiz->esquerda = rotacaoEsquerda(raiz->esquerda);
         return rotacaoDireita(raiz);
     }
-    // Rotação RR
+    // RotaÃ§Ã£o RR
     if (fb < -1 && fatorBalanceamento(raiz->direita) <= 0)
         return rotacaoEsquerda(raiz);
-    // Rotação RL
+    // RotaÃ§Ã£o RL
     if (fb < -1 && fatorBalanceamento(raiz->direita) > 0) {
         raiz->direita = rotacaoDireita(raiz->direita);
         return rotacaoEsquerda(raiz);
@@ -177,7 +177,7 @@ No* remover(No* raiz, string nome) {
     return raiz;
 }
 
-// Consulta de um nó por nome
+// Consulta de um nÃ³ por nome
 No* consultar(No* raiz, string nome) {
     if (!raiz) return NULL;
     if (nome == raiz->nome) return raiz;
@@ -223,6 +223,7 @@ int main() {
                 getline(cin, nome);
                 cout << "Sexo (M/F): ";
                 cin >> sexo;
+                sexo = toupper(sexo);
                 cin.ignore();
                 cout << "Idade: ";
                 cin >> idade;
@@ -263,4 +264,5 @@ int main() {
                 cout << "Opcao invalida!\n";
         }
     }
+
 }
