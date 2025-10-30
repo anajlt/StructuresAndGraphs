@@ -7,19 +7,19 @@ using namespace std;
 // Classe que representa um grafo
 class Graph {
 private:
-    int V;      // número de vértices
-    int A;      // número de arestas
+    int V;      // nÃºmero de vÃ©rtices
+    int A;      // nÃºmero de arestas
 
 public:
-    int **adj;  // matriz de adjacência
-    int *grau;  // vetor com o grau de cada vértice
+    int **adj;  // matriz de adjacÃªncia
+    int *grau;  // vetor com o grau de cada vÃ©rtice
 
     // Construtor
     Graph(int vertices) {
         V = vertices;
         A = 0;
 
-        // Aloca memória para a matriz de adjacência
+        // Aloca memÃ³ria para a matriz de adjacÃªncia
         adj = new int*[V];
         for (int i = 0; i < V; i++) {
             adj[i] = new int[V];
@@ -27,13 +27,13 @@ public:
                 adj[i][j] = 0; // inicializa tudo com 0
         }
 
-        // Aloca memória para o vetor de graus
+        // Aloca memÃ³ria para o vetor de graus
         grau = new int[V];
         for (int i = 0; i < V; i++)
             grau[i] = 0;
     }
 
-    // Destrutor (libera memória)
+    // Destrutor (libera memÃ³ria)
     ~Graph() {
         for (int i = 0; i < V; i++)
             delete[] adj[i];
@@ -43,9 +43,9 @@ public:
 
     // Insere uma aresta (v1 - v2)
     void inserirAresta(int v1, int v2) {
-        if (adj[v1][v2] == 0) { // se ainda não existe aresta
+        if (adj[v1][v2] == 0) { // se ainda nÃ£o existe aresta
             adj[v1][v2] = 1;
-            adj[v2][v1] = 1; // grafo não direcionado
+            adj[v2][v1] = 1; // grafo nÃ£o direcionado
             A++;
             grau[v1]++;
             grau[v2]++;
@@ -56,14 +56,14 @@ public:
     void removerAresta(int v1, int v2) {
         if (adj[v1][v2] == 1) { // se a aresta existe
             adj[v1][v2] = 0;
-            adj[v2][v1] = 0; // grafo não direcionado
+            adj[v2][v1] = 0; // grafo nÃ£o direcionado
             A--;
             grau[v1]--;
             grau[v2]--;
         }
     }
 
-    // mostra a matriz de adjacência
+    // mostra a matriz de adjacÃªncia
     void mostrarMatriz() {
         cout << "\nMatriz de Adjacencia:\n";
         for (int i = 0; i < V; i++) {
@@ -73,24 +73,24 @@ public:
         }
     }
 
-    // mostra o grau de cada vértice
+    // mostra o grau de cada vÃ©rtice
     void mostrarGrau() {
         cout << "\nGrau dos vertices:\n";
         for (int i = 0; i < V; i++)
             cout << "Vertice " << i << ": " << grau[i] << endl;
     }
 
-    // Lê o grafo de um arquivo .txt
+    // LÃª o grafo de um arquivo .txt
     void lerArquivo(string nomeArquivo) {
-        ifstream arq(nomeArquivo.c_str()); // conversão para const char*
+        ifstream arq(nomeArquivo.c_str()); // conversÃ£o para const char*
 
-        if (!arq) { // se não conseguir abrir
+        if (!arq) { // se nÃ£o conseguir abrir
             cout << "Erro ao abrir o arquivo!\n";
             return;
         }
 
         int v1, v2;
-        // lê cada linha (pares de vértices)
+        // lÃª cada linha (pares de vÃ©rtices)
         while (arq >> v1 >> v2) {
             inserirAresta(v1, v2);
         }
@@ -100,7 +100,7 @@ public:
     }
 };
 
-// Função do menu principal
+// FunÃ§Ã£o do menu principal
 int Menu_Grafo(Graph &g) {
     int opcao, v1, v2;
 
@@ -115,7 +115,7 @@ int Menu_Grafo(Graph &g) {
     cout << "5. Sair\n";
 
     // =============================
-    // Loop principal para executar as operações
+    // Loop principal para executar as operaÃ§Ãµes
     // =============================
     do {
         cout << "\nEscolha uma opcao: ";
@@ -144,26 +144,26 @@ int Menu_Grafo(Graph &g) {
         default:
             cout << "Opcao invalida!\n";
         }
-    } while (opcao != 5); // mantém o loop até o usuário sair
+    } while (opcao != 5); // mantÃ©m o loop atÃ© o usuÃ¡rio sair
 
     return 0;
 }
 
-// Função principal (main)
+// FunÃ§Ã£o principal (main)
 int main() {
     int vertices;
     cout << "Digite o numero de vertices do grafo: ";
     cin >> vertices;
 
-    Graph g(vertices); // cria o grafo com o número de vértices informado
+    Graph g(vertices); // cria o grafo com o nÃºmero de vÃ©rtices informado
 
     string nomeArquivo;
     cout << "Digite o nome do arquivo .txt: ";
     cin >> nomeArquivo;
 
-    g.lerArquivo(nomeArquivo); // lê as arestas do arquivo
+    g.lerArquivo(nomeArquivo); // lÃª as arestas do arquivo
 
-    Menu_Grafo(g); // exibe o menu uma vez e permite operações repetidas
+    Menu_Grafo(g); // exibe o menu uma vez e permite operaÃ§Ãµes repetidas
 
     return 0;
 }
