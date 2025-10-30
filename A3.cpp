@@ -3,11 +3,11 @@
 #include <vector>
 using namespace std;
 
-// Estrutura do nÛ da ·rvore
-// Cada nÛ armazena: nome (chave para ordenaÁ„o na ·rvore);
+// Estrutura do n√≥ da √°rvore
+// Cada n√≥ armazena: nome (chave para ordena√ß√£o na √°rvore);
 // sexo: 'M' ou 'F';
 // idade e peso: dados adicionais.;
-// esquerda/direita: ponteiros para os nÛs filhos
+// esquerda/direita: ponteiros para os n√≥s filhos
 struct No {
     string nome;
     char sexo;
@@ -17,8 +17,8 @@ struct No {
     No* direita;
 };
 
-// FunÁ„o: novoNo()
-// cria um novo nÛ na memÛria, preenchendo seus campos
+// Fun√ß√£o: novoNo()
+// cria um novo n√≥ na mem√≥ria, preenchendo seus campos
 No* novoNo(string nome, char sexo, int idade, float peso) {
     No* no = new No;
     no->nome = nome;
@@ -30,31 +30,31 @@ No* novoNo(string nome, char sexo, int idade, float peso) {
     return no;
 }
 
-// FunÁ„o: inserir()
-// insere uma pessoa na ·rvore bin·ria de busca (BST)
-// a chave È o nome, usada para decidir a posiÁ„o de inserÁ„o
+// Fun√ß√£o: inserir()
+// insere uma pessoa na √°rvore bin√°ria de busca (BST)
+// a chave √© o nome, usada para decidir a posi√ß√£o de inser√ß√£o
 No* inserir(No* raiz, string nome, char sexo, int idade, float peso) {
     if (raiz == NULL)
         return novoNo(nome, sexo, idade, peso);
 
-    // OrdenaÁ„o alfabÈtica (lexicogr·fica) pelo nome
+    // Ordena√ß√£o alfab√©tica (lexicogr√°fica) pelo nome
     if (nome < raiz->nome)
         raiz->esquerda = inserir(raiz->esquerda, nome, sexo, idade, peso);
     else if (nome > raiz->nome)
         raiz->direita = inserir(raiz->direita, nome, sexo, idade, peso);
 
-    // Se o nome for igual, ignora (n„o insere duplicado)
+    // Se o nome for igual, ignora (n√£o insere duplicado)
     return raiz;
 }
 
-// FunÁ„o: separarPorSexo()
-// percorre a ·rvore em ordem (esquerda -> raiz -> direita)
-// adiciona cada nÛ ‡ lista correspondente ao sexo
+// Fun√ß√£o: separarPorSexo()
+// percorre a √°rvore em ordem (esquerda -> raiz -> direita)
+// adiciona cada n√≥ √† lista correspondente ao sexo
 void separarPorSexo(No* raiz, vector<No*>& homens, vector<No*>& mulheres) {
     if (raiz != NULL) {
         separarPorSexo(raiz->esquerda, homens, mulheres); // visita esquerda
 
-        // Classifica o nÛ conforme o sexo informado
+        // Classifica o n√≥ conforme o sexo informado
         if (raiz->sexo == 'M' || raiz->sexo == 'm')
             homens.push_back(raiz);
         else if (raiz->sexo == 'F' || raiz->sexo == 'f')
@@ -64,7 +64,7 @@ void separarPorSexo(No* raiz, vector<No*>& homens, vector<No*>& mulheres) {
     }
 }
 
-// FunÁ„o: exibirLista()
+// Fun√ß√£o: exibirLista()
 // percorre o vetor e exibe os dados de cada pessoa
 void exibirLista(const std::vector<No*>& lista) {
     for (size_t i = 0; i < lista.size(); i++) {
@@ -76,9 +76,9 @@ void exibirLista(const std::vector<No*>& lista) {
     }
 }
 
-// FunÁ„o principal (main)
+// Fun√ß√£o principal (main)
 int main() {
-    No* raiz = NULL; // ponteiro para a raiz da ·rvore
+    No* raiz = NULL; // ponteiro para a raiz da √°rvore
     int opcao;
     string nome;
     char sexo;
@@ -98,7 +98,7 @@ int main() {
     cout << "0. Sair\n";
     cout << "====================================\n";
 
-    // O menu n„o se repete, mas o programa segue em loop
+    // O menu n√£o se repete, mas o programa segue em loop
     while (true) {
         cout << "\nEscolha uma opcao (0 para sair): ";
         cin >> opcao;
@@ -111,7 +111,7 @@ int main() {
 
         switch (opcao) {
             case 1:
-                // Inserir pessoa na ·rvore
+                // Inserir pessoa na √°rvore
                 cout << "Digite o nome: ";
                 getline(cin, nome);
                 cout << "Digite o sexo (M/F): ";
