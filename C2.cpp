@@ -7,33 +7,33 @@ using namespace std;
 // Classe que representa um grafo
 class Graph {
 private:
-    int V;      // número de vértices
-    int A;      // número de arestas
+    int V;      // nÃºmero de vÃ©rtices
+    int A;      // nÃºmero de arestas
 
 public:
-    int **adj;  // matriz de adjacência
-    int *grau;  // vetor com o grau de cada vértice
+    int **adj;  // matriz de adjacÃªncia
+    int *grau;  // vetor com o grau de cada vÃ©rtice
 
     // Construtor
     Graph(int vertices) {
         V = vertices;
         A = 0;
 
-        // Aloca memória para a matriz de adjacência
+        // Aloca memÃ³ria para a matriz de adjacÃªncia
         adj = new int*[V];
         for (int i = 0; i < V; i++) {
             adj[i] = new int[V];
             for (int j = 0; j < V; j++)
-                adj[i][j] = 0; // inicializa todas as posições com 0
+                adj[i][j] = 0; // inicializa todas as posiÃ§Ãµes com 0
         }
 
-        // Aloca memória para o vetor de graus
+        // Aloca memÃ³ria para o vetor de graus
         grau = new int[V];
         for (int i = 0; i < V; i++)
             grau[i] = 0;
     }
 
-    // Destrutor (libera memória)
+    // Destrutor (libera memÃ³ria)
     ~Graph() {
         for (int i = 0; i < V; i++)
             delete[] adj[i]; // libera cada linha da matriz
@@ -43,9 +43,9 @@ public:
 
     // Insere uma aresta (v1 - v2)
     void inserirAresta(int v1, int v2) {
-        if (adj[v1][v2] == 0) { // se ainda não existe a aresta
+        if (adj[v1][v2] == 0) { // se ainda nÃ£o existe a aresta
             adj[v1][v2] = 1;
-            adj[v2][v1] = 1; // grafo não direcionado
+            adj[v2][v1] = 1; // grafo nÃ£o direcionado
             A++;
             grau[v1]++;
             grau[v2]++;
@@ -56,14 +56,14 @@ public:
     void removerAresta(int v1, int v2) {
         if (adj[v1][v2] == 1) { // se a aresta existe
             adj[v1][v2] = 0;
-            adj[v2][v1] = 0; // grafo não direcionado
+            adj[v2][v1] = 0; // grafo nÃ£o direcionado
             A--;
             grau[v1]--;
             grau[v2]--;
         }
     }
 
-    // Mostra a matriz de adjacência
+    // Mostra a matriz de adjacÃªncia
     void mostrarMatriz() {
         cout << "\nMatriz de Adjacencia:\n";
         for (int i = 0; i < V; i++) {
@@ -73,24 +73,24 @@ public:
         }
     }
 
-    // Mostra o grau de cada vértice
+    // Mostra o grau de cada vÃ©rtice
     void mostrarGrau() {
         cout << "\nGrau dos vertices:\n";
         for (int i = 0; i < V; i++)
             cout << "Vertice " << i << ": " << grau[i] << endl;
     }
 
-    // Lê o grafo de um arquivo .txt
+    // LÃª o grafo de um arquivo .txt
     void lerArquivo(string nomeArquivo) {
         ifstream arq(nomeArquivo.c_str()); // converte string para const char*
 
-        if (!arq) { // se não conseguir abrir
+        if (!arq) { // se nÃ£o conseguir abrir
             cout << "Erro ao abrir o arquivo!\n";
             return;
         }
 
         int v1, v2;
-        // Lê cada linha (pares de vértices)
+        // LÃª cada linha (pares de vÃ©rtices)
         while (arq >> v1 >> v2) {
             inserirAresta(v1, v2);
         }
@@ -101,21 +101,21 @@ public:
 
     // Algoritmo de Floyd-Warshall
     void floydWarshall() {
-        // Cria a matriz de distâncias
+        // Cria a matriz de distÃ¢ncias
         int **dist = new int*[V];
         for (int i = 0; i < V; i++) {
             dist[i] = new int[V];
             for (int j = 0; j < V; j++) {
                 if (i == j)
-                    dist[i][j] = 0;         // cistância para ele mesmo
+                    dist[i][j] = 0;         // cistÃ¢ncia para ele mesmo
                 else if (adj[i][j] != 0)
-                    dist[i][j] = 1;         // peso da aresta (grafo não ponderado)
+                    dist[i][j] = 1;         // peso da aresta (grafo nÃ£o ponderado)
                 else
                     dist[i][j] = 1000000;   // representa infinito
             }
         }
 
-        // Atualiza a matriz com as menores distâncias
+        // Atualiza a matriz com as menores distÃ¢ncias
         for (int k = 0; k < V; k++) {
             for (int i = 0; i < V; i++) {
                 for (int j = 0; j < V; j++) {
@@ -125,7 +125,7 @@ public:
             }
         }
 
-        // Mostra a matriz de distâncias mínimas
+        // Mostra a matriz de distÃ¢ncias mÃ­nimas
         cout << "\nMatriz de caminhos minimos (Floyd-Warshall):\n";
         for (int i = 0; i < V; i++) {
             for (int j = 0; j < V; j++) {
@@ -137,14 +137,14 @@ public:
             cout << endl;
         }
 
-        // Libera memória
+        // Libera memÃ³ria
         for (int i = 0; i < V; i++)
             delete[] dist[i];
         delete[] dist;
     }
 };
 
-// Função do MENU principal
+// FunÃ§Ã£o do MENU principal
 int Menu_Grafo(Graph &g) {
     int opcao, v1, v2;
 
@@ -157,7 +157,7 @@ int Menu_Grafo(Graph &g) {
     cout << "5. Floyd-Warshall (caminho minimo)\n";
     cout << "6. Sair\n";
 
-    // Loop principal para executar as operações
+    // Loop principal para executar as operaÃ§Ãµes
     do {
         cout << "\nDigite a opcao desejada: ";
         cin >> opcao;
@@ -188,26 +188,26 @@ int Menu_Grafo(Graph &g) {
         default:
             cout << "Opcao invalida!\n";
         }
-    } while (opcao != 6); // mantém o loop até o usuário escolher sair
+    } while (opcao != 6); // mantÃ©m o loop atÃ© o usuÃ¡rio escolher sair
 
     return 0;
 }
 
-// Função principal (main)
+// FunÃ§Ã£o principal (main)
 int main() {
     int vertices;
     cout << "Digite o numero de vertices do grafo: ";
     cin >> vertices;
 
-    Graph g(vertices); // cria o grafo com o número de vértices informado
+    Graph g(vertices); // cria o grafo com o nÃºmero de vÃ©rtices informado
 
     string nomeArquivo;
     cout << "Digite o nome do arquivo .txt: ";
     cin >> nomeArquivo;
 
-    g.lerArquivo(nomeArquivo); // lê as arestas do arquivo
+    g.lerArquivo(nomeArquivo); // lÃª as arestas do arquivo
 
-    Menu_Grafo(g); // exibe o menu uma vez e permite operações repetidas
+    Menu_Grafo(g); // exibe o menu uma vez e permite operaÃ§Ãµes repetidas
 
     return 0;
 }
