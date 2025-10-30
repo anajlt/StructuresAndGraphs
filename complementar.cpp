@@ -3,7 +3,7 @@ using namespace std;
 
 #define vertex int
 
-// Função auxiliar para alocar matriz de inteiros dinamicamente
+// FunÃ§Ã£o auxiliar para alocar matriz de inteiros dinamicamente
 int **Aloca_MatrizInt(int l, int c, int **m) {
     m = new int*[l];
     for(int i = 0; i < l; i++) {
@@ -16,13 +16,13 @@ int **Aloca_MatrizInt(int l, int c, int **m) {
 
 class Graph {
 private:
-    int V; // número de vértices
-    int A; // número de arestas
+    int V; // nÃºmero de vÃ©rtices
+    int A; // nÃºmero de arestas
 
 public:
-    int **adj;  // matriz de adjacência
-    int **dist; // matriz de distâncias (opcional para algoritmos como Floyd-Warshall)
-    int *grau;  // vetor de grau dos vértices
+    int **adj;  // matriz de adjacÃªncia
+    int **dist; // matriz de distÃ¢ncias (opcional para algoritmos como Floyd-Warshall)
+    int *grau;  // vetor de grau dos vÃ©rtices
 
     // Construtor
     Graph(int vertices = 0) {
@@ -50,14 +50,14 @@ public:
     void addEdge(vertex u, vertex v) {
         if(u >= 0 && u < V && v >= 0 && v < V) {
             adj[u][v] = 1;
-            adj[v][u] = 1; // grafo não direcionado
+            adj[v][u] = 1; // grafo nÃ£o direcionado
             A++;
         } else {
             cout << "Vertices invalidos!" << endl;
         }
     }
 
-    // Imprime a matriz de adjacência
+    // Imprime a matriz de adjacÃªncia
     void printGraph() {
         cout << "\nMatriz de adjacencia:" << endl;
         for(int i = 0; i < V; i++) {
@@ -68,7 +68,7 @@ public:
         }
     }
 
-    // Calcula o grau de todos os vértices
+    // Calcula o grau de todos os vÃ©rtices
     void calculaGrau() {
         cout << "\nGrau dos vertices:" << endl;
         for(int i = 0; i < V; i++) {
@@ -124,7 +124,7 @@ int main() {
     cout << "Digite o numero de vertices do grafo: ";
     cin >> n;
 
-    Graph g(n); // cria o grafo com n vértices
+    Graph g(n); // cria o grafo com n vÃ©rtices
     g.menu();   // chama o menu do grafo
 
     return 0;
